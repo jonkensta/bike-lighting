@@ -41,15 +41,15 @@ def build_processing_steps(args):
     half_chunk = chunk // 2
     input_freqs = np.linspace(0, half_rate, half_chunk)
 
-    rho = np.linspace(0.05, 1, args.num_leds)
-    output_freqs = np.exp2(9*rho + 4)
+    rho = np.linspace(0, 1, args.num_leds)
+    output_freqs = np.exp2(8*rho + 4)
     map_ = processing.FrequencyMapper(input_freqs, output_freqs)
     steps.append(map_)
 
-    agc = processing.GainController(window=21, amplitude=400, rho=0.999)
+    agc = processing.GainController(window=15, amplitude=5, rho=0.9)
     steps.append(agc)
 
-    clip = processing.Clipper(max_value=200)
+    clip = processing.Clipper(max_value=100)
     steps.append(clip)
 
     colorize = processing.Colorizer()
