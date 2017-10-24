@@ -37,8 +37,8 @@ def build_processing_steps(args):
     fft = processing.FourierTransformer(chunk)
     steps.append(fft)
 
-    half_chunk = chunk // 2
     half_rate = args.sampling_rate // 2
+    half_chunk = chunk // 2
     input_freqs = np.linspace(0, half_rate, half_chunk)
 
     rho = np.linspace(0.05, 1, args.num_leds)
@@ -84,8 +84,8 @@ def main():
         samples = devices.generate_samples(*args, **kwargs)
 
         for chunk in samples:
-            chunk = processing.apply_steps(chunk, steps)
-            serial.write(chunk)
+            processed = processing.apply(chunk, steps)
+            serial.write(processed)
             time.sleep(15e-3)
 
 
