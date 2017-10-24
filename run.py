@@ -74,13 +74,13 @@ def main():
     # Processing arguments
     parser.add_argument('--num_leds', type=int, default=300)
 
-    args = parser.parse_args()
+    clargs = parser.parse_args()
 
-    args, kwargs = map_serial_args(args)
+    args, kwargs = map_serial_args(clargs)
     with devices.Serial(*args, **kwargs) as serial:
-        steps = build_processing_steps(args)
+        steps = build_processing_steps(clargs)
 
-        args, kwargs = map_audio_args(args)
+        args, kwargs = map_audio_args(clargs)
         samples = devices.generate_samples(*args, **kwargs)
 
         for chunk in samples:
