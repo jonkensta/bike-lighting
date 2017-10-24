@@ -62,7 +62,8 @@ class Colorizer(object):
         pass
 
     def __call__(self, samples):
-        return np.repeat(samples, 3).astype(int)
+        samples = np.repeat(samples, 3)
+        return [x&0xFF for x in list(samples.astype(int))]
 
 
 def apply(samples, steps):
