@@ -52,6 +52,9 @@ def build_processing_steps(args):
     clip = processing.Clipper(max_value=100)
     steps.append(clip)
 
+    threshold = processing.Thresholder(min_value=100)
+    steps.append(threshold)
+
     colorize = processing.Colorizer()
     steps.append(colorize)
 
