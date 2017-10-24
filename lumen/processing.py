@@ -46,6 +46,16 @@ class Clipper(object):
         return np.clip(samples, 0, self._max_value)
 
 
+class Thresholder(object):
+
+    def __init__(self, min_value=100.0):
+        self._min_value = float(min_value)
+
+    def __call__(self, samples):
+        median = np.median(samples[samples > 0])
+        return np.choose(samples >= median, (0, samples))
+
+
 class Colorizer(object):
 
     def __init__(self):
