@@ -6,8 +6,8 @@ import numpy as np
 
 import pyaudio
 
-import lumen.devices as devices
-import lumen.processing as processing
+from lumen import devices
+from lumen import processing
 
 
 def map_audio_args(args):
