@@ -66,13 +66,14 @@ class Serial(object):
     def __init__(self, device, speed):
         self._device = device
         self._spi = spidev.SpiDev()
-        self._spi.max_speed_hz = int(speed)
+        self._speed = int(speed)
 
     def __enter__(self):
         self._spi.open(*self._device)
+        self._spi.max_speed_hz = self._speed
         return self
 
-    def __exit__(self):
+    def __exit__(self, *args):
         self._spi.close()
 
     @staticmethod
