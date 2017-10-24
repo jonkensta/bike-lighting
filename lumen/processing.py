@@ -25,15 +25,15 @@ class FrequencyMapper(object):
 
 class GainController(object):
 
-    def __init__(self, window=21, amplitude=200, rho=0.999):
+    def __init__(self, window=21, amplitude=100, rho=0.999):
         self._rho = float(rho)
         self._window = int(window)
         self._amplitude = float(amplitude)
-        self._divisor = 1000
+        self._divisor = 100000
 
     def __call__(self, samples):
-        divisor = uniform_filter1d(samples, self._window) / self._window
-        self._divisor = self._rho * self._divisor + (1 - self._rho) * divisor
+        divisor = uniform_filter1d(samples, self._window)
+        self._divisor = self._rho*self._divisor + (1-self._rho)*divisor
         return self._amplitude * samples / self._divisor
 
 
