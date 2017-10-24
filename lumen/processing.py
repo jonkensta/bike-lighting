@@ -35,7 +35,7 @@ class GainController(object):
     def __call__(self, samples):
         divisor = uniform_filter1d(samples, self._window) / self._window
         self._divisor = self._rho * self._divisor + (1 - self._rho) * divisor
-        return self._amplitude * samples / self._norm
+        return self._amplitude * samples / self._divisor
 
 
 class Clipper(object):
