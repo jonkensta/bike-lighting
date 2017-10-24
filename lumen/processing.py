@@ -5,12 +5,11 @@ from scipy.ndimage import uniform_filter1d
 class FourierTransformer(object):
 
     def __init__(self, size):
-        self._size = int(size)
-        self._window = np.hamming(self._size)
-        self._half_size = size // 2
+        self._window = np.hamming(int(size))
+        self._half_size = int(size) // 2
 
     def __call__(self, samples):
-        samples *= self._window
+        samples = samples * self._window
         return np.abs(np.fft.fft(samples)[:self._half_size])
 
 
