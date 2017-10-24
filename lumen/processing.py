@@ -44,7 +44,7 @@ class Clipper(object):
         self._max_value = float(max_value)
 
     def __call__(self, samples):
-        samples = np.clip(samples, 0, self._max_value)
+        return np.clip(samples, 0, self._max_value)
 
 
 class Colorizer(object):
